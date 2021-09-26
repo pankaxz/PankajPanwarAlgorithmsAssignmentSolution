@@ -8,38 +8,77 @@ public class CompanyDatabase {
     public BinarySearchTree binarySearchTree = new BinarySearchTree();
     public MergeSort mergeSort = new MergeSort();
 
+    /***
+     * Array list for the Collection of companies
+     */
     private ArrayList<Company> companies = new ArrayList<>();
+
+    /**
+     *  Counter for the companies whose shares increased
+     */
     private int riseCounter = 0;
+
+    /**
+     *  Counter for the companies whose shares decreased
+     */
     private int declineCounter = 0;
 
+    /**
+     * Constructor
+     */
     public CompanyDatabase(){}
 
+    /**
+     * Parameterized Constructor
+     * @param numberOfCompanies : number of companies input from the user.
+     */
     public CompanyDatabase(int numberOfCompanies){
         companies = CreateDatabase(numberOfCompanies);
     }
 
+    /***
+     * Setting the Values of each Company based on the user input.
+     * @param numberOfCompanies: number of companies input from the user.
+     * @return : Array list for the Collection of companies
+     */
     public ArrayList<Company> CreateDatabase(int numberOfCompanies){
-
         for(int i = 0; i < numberOfCompanies ; i++){
-
             String companyName = "Company " + (i+1);
+
             System.out.print("Enter the Share Price of "+ companyName + " : ");
+            double sharePrice = 0;
+            try {
+                sharePrice = sc.nextDouble();
+            }
+            catch (Exception e ){
+                System.out.println("Wrong input, you have to enter a number : exception : " + e);
+                System.exit( 0 );
+            }
 
-            double sharePrice = sc.nextDouble();
-
-            System.out.print("Whether "+ companyName +"'s stock price rose today compare to yesterday?");
-            boolean sharePriceIncreased = sc.nextBoolean();
-            if(sharePriceIncreased)
-                riseCounter++;
-            else declineCounter++;
+            try {
+                System.out.print( "Whether " + companyName + "'s stock price rose today compare to yesterday?" );
+                boolean sharePriceIncreased = sc.nextBoolean();
+                if(sharePriceIncreased)
+                    riseCounter++;
+                else declineCounter++;
+            }
+            catch (InputMismatchException e) {
+                System.out.println("Wrong input, you have to enter \"true\" or \"false\"  : exception : " + e);
+                System.exit( 0 );
+            }
 
             Company company = new Company(companyName, sharePrice, true);
+
+            /* * Adding the company variable to the Array list */
             companies.add( company );
+
+            /* Adding the share price to the BST. */
             binarySearchTree.Insert( (double) sharePrice );
         }
 
         return companies;
     }
+
 
     public void MergeSortAscending(){
         double [] sharesArray = new double[companies.size()];

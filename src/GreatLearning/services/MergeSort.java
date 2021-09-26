@@ -1,7 +1,13 @@
 package GreatLearning.services;
 
 public class MergeSort {
-
+    /**
+     * Merge Sort implementation
+     * @param array : Array of Share price values added by the user.
+     * @param left : Left Most Array element.
+     * @param right : Right Most Array element.
+     * @param ascending : Boolean for sorting order.
+     */
     public void Sort(double [] array, int left, int right, boolean ascending){
         if(left < right){
             int mid = (left + right) / 2;
@@ -15,8 +21,8 @@ public class MergeSort {
         int n1 = mid - left + 1;
         int n2 = right - mid;
 
-        int [] leftArray = new int [n1];
-        int [] rightArray = new int [n2];
+        double [] leftArray = new double [n1];
+        double [] rightArray = new double [n2];
 
         for(int i = 0; i < n1; i++)
             leftArray[i] = (int) array[left + i];

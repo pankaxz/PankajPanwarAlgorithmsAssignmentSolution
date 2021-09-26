@@ -33,7 +33,7 @@ public class Menu {
                 System.exit( 0 );
             }
             case 1 -> {
-                System.out.println( "Stock prices in ascending order are : : " );
+                System.out.println( "Stock prices in ascending order are : " );
                 companyDatabase.MergeSortAscending();
             }
             case 2 -> {
@@ -52,7 +52,7 @@ public class Menu {
                 companyDatabase.SearchInDatabase( key );
 
             }
-            default -> throw new IllegalStateException( "Unexpected value: " + input );
+            default -> throw new IllegalStateException( "Invalid value: " + input + ". You have to enter a value from 0 to 5");
         }
     }
 
